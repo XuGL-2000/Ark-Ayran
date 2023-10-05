@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{% static 'alina/css/bootstrap.css' %}" rel="stylesheet">
+    {% block css %}
+    {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand col-lg-1" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">饼组</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">轮换饼学</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                宏观饼学
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">模组饼学</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled">明日旋律</a>
+            </li>
+          </ul>
+          {#          <form class="d-flex">#}
+          {#            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
+          {#            <button class="btn btn-outline-success" type="submit">Search</button>#}
+          {#          </form>#}
+          <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#"
+                 id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                登录
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+
+    <script src="{% static 'alina/js/jQuery3.7.1.js' %}"></script>
+    <script src="{% static 'alina/js/bootstrap5.1.3.js' %}"></script>
+    {% block js %}
+    {% endblock %}
+  </body>
+</html>

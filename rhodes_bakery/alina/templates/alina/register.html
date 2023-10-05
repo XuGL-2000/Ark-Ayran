@@ -1,0 +1,17 @@
+{% extends 'alina/base.html' %}
+{% block content %}
+  <div class="container">
+    <form method="post">
+      {% csrf_token %}
+      {% for obj in form %}
+        <div>
+          <label>{{ obj.label }}</label>
+          {{ obj }}
+          {{ obj.errors.0 }}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+
+  </div>
+{% endblock %}

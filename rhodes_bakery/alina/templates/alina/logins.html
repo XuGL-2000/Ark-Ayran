@@ -1,0 +1,29 @@
+{% extends "alina/base.html" %}
+<div class="form-control">
+  <div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">用户登录</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+            <label>用户名</label>
+            {{ form.username }}
+            <span style="color: red;">{{ form.username.error.0 }}</span>
+            <label>密码</label>
+            {{ form.password }}
+            <span style="color: red;">{{ form.password.error.0 }}</span>
+            <p>验证码</p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">登录</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
