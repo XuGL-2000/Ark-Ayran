@@ -1,0 +1,25 @@
+{% extends 'alina/base.html' %}
+{% block content %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">username</th>
+        <th scope="col">operate</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for obj in query_obj %}
+        <tr>
+          <th scope="row">{{ obj.id }}</th>
+          <td>{{ obj.username }}</td>
+          <td>
+            <a href="#">EDIT</a>
+            <a href="#">DELETE</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

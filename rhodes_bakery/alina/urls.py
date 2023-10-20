@@ -7,6 +7,6 @@ app_name = 'alina'
 urlpatterns = [
     path('', views.hello),
     path('m_page/', mains.mian_page),
-
-    path('login/', log.register),
+    path('login/list/', log.login_list),
+    path('login/add/', log.register),
 ]
