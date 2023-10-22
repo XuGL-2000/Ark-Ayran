@@ -46,12 +46,12 @@ def logins(request):
 
 def login_edit(request, nid):
     query_obj = Login.objects.filter(id=nid).first()
+    print(query_obj)
     if request.method == "GET":
         form = LoginMForm(instance=query_obj)
-        print(form)
         return render(request, "alina/alina_edit.html", {"form": form})
     form = LoginMForm(data=request.POST, instance=query_obj)
-    print(request.POST)
+
     if form.is_valid():
         if Login.objects.filter(username=query_obj.username).exists():
             # raise ValidationError("user has already in!")
