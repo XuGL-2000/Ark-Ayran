@@ -1,0 +1,13 @@
+{% extends 'alina/base.html' %}
+{% block content %}
+  <div class="container">
+    <form class="form container">
+      {% for obj in form %}
+        <label class="form-label">{{ obj.label }}</label>
+        {{ obj }}
+        {{ obj.errors.0 }}
+      {% endfor %}
+      <button type="submit" class="btn btn-success">sub</button>
+    </form>
+  </div>
+{% endblock %}

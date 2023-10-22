@@ -1,6 +1,7 @@
 {% extends "alina/base.html" %}
-<div class="form-control">
-  <div class="modal" tabindex="-1">
+{% block content %}
+  <input type="button" id="btnadd" value="values">
+  <div class="modal" tabindex="-1" id="form1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -26,4 +27,17 @@
       </div>
     </div>
   </div>
-</div>
+{% endblock %}
+{% block js %}
+  <script type="text/javascript">
+      $(function () {
+          bindlogins();
+      })
+
+      function bindlogins() {
+          $("#btnadd").click(function () {
+              $("#form1").modal("show");
+          })
+      }
+  </script>
+{% endblock %}

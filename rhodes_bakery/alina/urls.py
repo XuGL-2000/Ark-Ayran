@@ -9,4 +9,7 @@ urlpatterns = [
     path('m_page/', mains.mian_page),
     path('login/list/', log.login_list),
     path('login/add/', log.register),
+    path('login/logins/', log.logins),
+    path('login/delete/<int:nid>/', log.login_delete),
+    path('login/edit/<int:nid>/', log.login_edit),
 ]
