@@ -1,12 +1,12 @@
 {% extends 'alina/base.html' %}
 {% block content %}
-  <div class="container">
-    <form class="form container" method="post">
-    {% csrf_token %}
+  <div class="container" style="color: white;">
+    <form class="form container" method="post" style="width: 500px;">
+      {% csrf_token %}
       {% for obj in form %}
         <label class="form-label">{{ obj.label }}</label>
         {{ obj }}
-        {{ obj.errors.0 }}
+        <p>{{ obj.errors.0 }}</p>
       {% endfor %}
       <button type="submit" class="btn btn-success">sub</button>
     </form>

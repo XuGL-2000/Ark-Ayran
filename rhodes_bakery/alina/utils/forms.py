@@ -51,3 +51,38 @@ class LoginMForm(InitModelForm):
         if pwd != con_pwd:
             raise ValidationError("密码不一致")
         return con_pwd
+
+
+class LoginEditNameForm(InitModelForm):
+    class Meta:
+        model = Login
+        fields = ["username"]
+
+
+class LoginEditForm(LoginMForm):
+    class Meta:
+        model = Login
+        fields = ["password", "confirm_password"]
+
+
+class LoginInForm(InitModelForm):
+    class Meta:
+        model = Login
+        fields = ["username", "password"]
+
+    def clean_password(self):
+        # print(self.cleaned_data)
+        pwd = self.cleaned_data.get("password")
+        m_pwd = md5(pwd)
+        # user = self.cleaned_data.get("username")
+        #
+        # user1 = Login.objects.filter(username=user).first()
+        # if user1:
+        #     pwd1 = user1.password
+        #     if m_pwd != pwd1:
+        #         raise ValidationError("用户名或密码不正确")
+        # else:
+        #     raise ValidationError("用户名不存在！")
+        # print(m_pwd, pwd1)
+
+        return m_pwd

@@ -1,4 +1,5 @@
 {% extends "alina/base.html" %}
+
 {% block content %}
   <input type="button" id="btnadd" value="values">
   <div class="modal" tabindex="-1" id="form1">
@@ -9,7 +10,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="post">
+          <form method="post" id="forms">
             <label>用户名</label>
             {{ form.username }}
             <span style="color: red;">{{ form.username.error.0 }}</span>
@@ -20,7 +21,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">登录</button>
+          <button id="subs" type="submit" class="btn btn-primary">登录</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
 
         </div>
@@ -30,13 +31,37 @@
 {% endblock %}
 {% block js %}
   <script type="text/javascript">
+      const csrftoken = Cookies.get('csrftoken');
       $(function () {
           bindlogins();
+          bindsubs();
       })
 
       function bindlogins() {
           $("#btnadd").click(function () {
               $("#form1").modal("show");
+          })
+      }
+
+      function bindsubs() {
+          $("#subs").click(function () {
+              $.ajax({
+                  url: "/alina/login/logins/",
+                  type: "post",
+                  headers: {"X-CSRFToken": csrftoken},
+                  data: $("#forms").serialize(),
+                  success: function (res) {
+                      if (res.status) {
+                          alert(res.status);
+                          location.href = "/alina/login/list";
+                      } else {
+                          $.each(res.errors, function (name, errorLine) {
+                              $("#id_" + name).next().text(errorLine[0])
+                          })
+
+                      }
+                  }
+              });
           })
       }
   </script>

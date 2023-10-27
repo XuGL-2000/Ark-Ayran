@@ -2,8 +2,7 @@
 {% block content %}
   <div class="container">
     <a href="/alina/login/add/" class="btn btn-success">新增用户</a>
-
-    <table class="table container">
+    <table class="table container" style="color: white">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -16,7 +15,9 @@
           {% for obj in query_obj %}
             <tr>
               <th scope="row">{{ obj.id }}</th>
-              <td>{{ obj.username }}</td>
+              <td>
+                {{ obj.username }} <a uid="{{ obj.id }}" class="btn btn-success btn-edit">edit</a>
+              </td>
               <td>
                 <a href="/alina/login/edit/{{ obj.id }}" class="btn btn-success">EDIT</a>
                 <a href="/alina/login/delete/{{ obj.id }}/" class="btn btn-danger">DELETE</a>
@@ -33,4 +34,81 @@
     </table>
 
   </div>
+  <div class="modal" tabindex="-1" id="modalEditName">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">username change</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEdit" novalidate>
+            <!-- {% for obj in form %}
+              <label class="label-default">{{ obj.label }}</label>
+              {{ obj }}
+              <p>{{ obj.errors.0 }}</p>
+            {% endfor %} -->
+            <label>username</label>
+            <input id="inputs1" type="text">
+            <p id="errors"></p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="save1" type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block js %}
+  <script type="text/javascript">
+      var EDIT_ID;
+      const csrftoken = Cookies.get('csrftoken');
+      $(function () {
+          bindEditName();
+          bindEditSave();
+
+      })
+
+      function bindEditName() {
+          $('.btn-edit').click(function () {
+              EDIT_ID = $(this).attr('uid');
+              console.log(EDIT_ID);
+              $('#modalEditName').modal('show');
+          })
+      }
+
+      function bindEditSave() {
+          $('#save1').click(function () {
+              EditSave();
+          })
+      }
+
+      function EditSave() {
+          $.ajax({
+              url: "/alina/login/edit/name/" + "?nid=" + EDIT_ID,
+              type: "post",
+              headers: {"X-CSRFToken": csrftoken},
+              data: {
+                  "username": $("#inputs1").val()
+              },
+              success: function (res) {
+                  if (res.status) {
+                      alert("success");
+                      $('#modalEditName').modal('hide');
+                      location.reload();
+                  } else {
+                      console.log(res.errors);
+                      $.each(res.errors, function (name, errorList) {
+                          $("#errors").text(errorList[0]);
+
+                      })
+
+
+                  }
+              }
+          })
+      }
+  </script>
 {% endblock %}
